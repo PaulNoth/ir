@@ -1,0 +1,7 @@
+Slovenska DBpedia obsahuje 254 301 zaznamov.
+Anglicka DBpedia 5 882 037 zaznamov
+Nemecka 1 919 518
+
+slovenska je sparovana s 179070 anglickymi a 126887 nemeckymi 
+anglicka sparovana s 179070 slovenskymi a 957322 nemeckymi
+nemecka s 957322 anglickymi a 126887 sk
