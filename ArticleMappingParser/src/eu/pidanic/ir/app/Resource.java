@@ -9,37 +9,37 @@ import eu.pidanic.ir.util.Language;
  */
 public final class Resource
 {
-	private final String id;
+    private final String id;
 
-	private final String url;
+    private final String url;
 
-	private final Language lang;
+    private final Language lang;
 
-	public Resource(String id, Language lang, String url)
-	{
-		this.lang = lang;
-		this.id = id;
-		this.url = url;
-	}
+    public Resource(String id, Language lang, String url)
+    {
+        this.lang = lang;
+        this.id = id;
+        this.url = url;
+    }
 
-	public Language getLanguage()
-	{
-		return lang;
-	}
+    public Language getLanguage()
+    {
+        return lang;
+    }
 
-	public String getUrl()
-	{
-		return url;
-	}
+    public String getUrl()
+    {
+        return url;
+    }
 
-	public String getId()
-	{
-		return id;
-	}
+    public String getId()
+    {
+        return id;
+    }
 
-	@Override
-	public String toString()
-	{
-		return id + " | " + lang + " | " + url;
-	}
+    @Override
+    public String toString()
+    {
+        return id + " | " + lang + " | " + url;
+    }
 }
