@@ -8,4 +8,4 @@ nemecka s 957322 anglickymi a 126887 sk
 
 
 104 057 kompletných preložených štvoríc SK, FR, DE, EN
-566 640 kompletných preložených štvoríc FR, DE, EN
+566 640 kompletných preložených trojíc FR, DE, EN
