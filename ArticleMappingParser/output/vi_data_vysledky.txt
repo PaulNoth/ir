@@ -5,3 +5,7 @@ Nemecka 1 919 518
 slovenska je sparovana s 179070 anglickymi a 126887 nemeckymi 
 anglicka sparovana s 179070 slovenskymi a 957322 nemeckymi
 nemecka s 957322 anglickymi a 126887 sk
+
+
+104 057 kompletných preložených štvoríc SK, FR, DE, EN
+566 640 kompletných preložených štvoríc FR, DE, EN
