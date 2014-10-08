@@ -84,7 +84,7 @@ public class App
                     }
                 }
             }
-            System.out.println(result.size());
+            System.out.println(result);
             br.close();
         }
 
