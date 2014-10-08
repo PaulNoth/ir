@@ -7,18 +7,16 @@ import eu.pidanic.ir.util.Language;
  * @author Pidanic
  *
  */
-public final class Resource
+public final class Resource implements Comparable<Resource>
 {
-    private final String id;
 
     private final String url;
 
     private final Language lang;
 
-    public Resource(String id, Language lang, String url)
+    public Resource(Language lang, String url)
     {
         this.lang = lang;
-        this.id = id;
         this.url = url;
     }
 
@@ -32,14 +30,16 @@ public final class Resource
         return url;
     }
 
-    public String getId()
-    {
-        return id;
-    }
-
     @Override
     public String toString()
     {
-        return id + " | " + lang + " | " + url;
+        return lang + " | " + url;
+    }
+
+    @Override
+    public int compareTo(Resource o)
+    {
+        // TODO check for exception?
+        return lang.compareTo(o.lang);
     }
 }

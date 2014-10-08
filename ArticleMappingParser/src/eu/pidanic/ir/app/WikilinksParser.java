@@ -4,37 +4,56 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import eu.pidanic.ir.util.Language;
 import eu.pidanic.ir.util.LinkUtil;
 
-public class WikilinksParser
+public final class WikilinksParser
 {
-    public static void main(String[] args) throws IOException
-    {
-        String path = "data" + File.separator + "wikipedia_links"
-                + File.separator + "sample_wikipedia_links_sk.ttl";
-        File f = new File(path);
+    private static final File[] FILES = new File("data" + File.separator
+            + "wikipedia_links").listFiles();
 
-        BufferedReader br = new BufferedReader(new FileReader(f));
-        String line = null;
-        String lastResource = "";
-        while ((line = br.readLine()) != null)
+    public WikilinksParser()
+    {
+    }
+
+    // TODO rethrow exception and log to some file
+    public Map<String, String> parseWikipediaLinks(Language lang)
+            throws IOException
+    {
+        Map<String, String> result = new HashMap<>();
+        for (File file : FILES)
         {
-            // System.out.println(line);
-            String[] links = line.split("\\s+");
-            if(links[0].contains("dbpedia"))
+            if(file.getName().contains(lang.toString().toLowerCase()))
             {
-                String dbpediaUrl = LinkUtil.removeBracket(links[0]);
-                String wikiUrl = LinkUtil.removeBracket(links[2]);
-                if(!lastResource.equals(dbpediaUrl))
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line = null;
+                String lastResource = "";
+                while ((line = br.readLine()) != null)
                 {
-                    WikilinkResource wr = new WikilinkResource(Language.SK,
-                            dbpediaUrl, wikiUrl);
-                    System.out.println(wr);
+                    if(!line.startsWith("#"))
+                    {
+                        String[] links = line.split("\\s+");
+                        if(links[0].contains("dbpedia"))
+                        {
+                            String dbpediaUrl = LinkUtil
+                                    .removeBracket(links[0]);
+                            if(!lastResource.equals(dbpediaUrl))
+                            {
+                                String wikiUrl = LinkUtil
+                                        .removeBracket(links[2]);
+                                // String word = LinkUtil.parseWord(dbpediaUrl);
+                                // word = StringUtil.makeWords(word);
+                                result.put(dbpediaUrl, wikiUrl);
+                            }
+                        }
+                    }
                 }
+                br.close();
             }
         }
-        br.close();
+        return result;
     }
 }
