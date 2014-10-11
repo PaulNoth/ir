@@ -9,15 +9,17 @@ import eu.pidanic.ir.util.Language;
  */
 public final class Resource implements Comparable<Resource>
 {
-
     private final String url;
 
     private final Language lang;
 
-    public Resource(Language lang, String url)
+    private final String wikiUrl;
+
+    public Resource(Language lang, String url, String wikiLink)
     {
         this.lang = lang;
         this.url = url;
+        this.wikiUrl = wikiLink;
     }
 
     public Language getLanguage()
@@ -30,10 +32,15 @@ public final class Resource implements Comparable<Resource>
         return url;
     }
 
+    public String getWikiUrl()
+    {
+        return wikiUrl;
+    }
+
     @Override
     public String toString()
     {
-        return lang + " | " + url;
+        return lang + " | " + url + " | " + wikiUrl;
     }
 
     @Override

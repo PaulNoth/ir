@@ -12,8 +12,22 @@ import eu.pidanic.ir.util.LinkUtil;
 
 public final class WikilinksParser
 {
-    private static final File[] FILES = new File("data" + File.separator
-            + "wikipedia_links").listFiles();
+    // private static final File[] FILES = new File("data" + File.separator
+    // + "wikipedia_links").listFiles();
+
+    private static final File[] FILES;
+    static
+    {
+        FILES = new File[4];
+        FILES[0] = new File(
+                "C:\\Users\\Paul P\\Desktop\\New folder\\wikipedia_links_fr.ttl");
+        FILES[1] = new File(
+                "C:\\Users\\Paul P\\Desktop\\New folder\\wikipedia_links_de.ttl");
+        FILES[2] = new File(
+                "C:\\Users\\Paul P\\Desktop\\New folder\\wikipedia_links_en.ttl");
+        FILES[3] = new File(
+                "C:\\Users\\Paul P\\Desktop\\New folder\\wikipedia_links_sk.ttl");
+    }
 
     public WikilinksParser()
     {

@@ -30,6 +30,9 @@ public class Dictionary
                         .getUrl()));
                 line.append(word);
                 line.append("|");
+                String wikiLink = resource.getWikiUrl();
+                line.append(wikiLink);
+                line.append("|");
             }
             // removes last '|' and replaces with \n
             line.setCharAt(line.length() - 1, '\n');

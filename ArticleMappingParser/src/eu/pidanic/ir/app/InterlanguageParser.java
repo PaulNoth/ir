@@ -64,6 +64,8 @@ public class InterlanguageParser
             String line = null;
             BufferedReader br = new BufferedReader(new FileReader(FILES[i]));
             String lastResource = "";
+            WikilinksParser wp = new WikilinksParser();
+            Map<String, String> links = wp.parseWikipediaLinks(lang);
             while ((line = br.readLine()) != null)
             {
                 if(!line.startsWith("#"))
@@ -74,12 +76,16 @@ public class InterlanguageParser
                     if(!lastResource.equals(resource))
                     {
                         String id = LinkUtil.parseWord(idResource);
-                        Resource r = new Resource(lang, resource);
-                        Set<Resource> set = pairs.get(id);
-                        if(set != null)
+                        String wikiLink = links.get(resource);
+                        if(wikiLink != null)
                         {
-                            set.add(r);
-                            pairs.put(id, set);
+                            Resource r = new Resource(lang, resource, wikiLink);
+                            Set<Resource> set = pairs.get(id);
+                            if(set != null)
+                            {
+                                set.add(r);
+                                pairs.put(id, set);
+                            }
                         }
                         lastResource = resource;
                     }
@@ -110,6 +116,8 @@ public class InterlanguageParser
         String line = null;
         BufferedReader br = new BufferedReader(new FileReader(SK));
         String lastResource = "";
+        WikilinksParser wp = new WikilinksParser();
+        Map<String, String> links = wp.parseWikipediaLinks(Language.SK);
         while ((line = br.readLine()) != null)
         {
             if(!line.startsWith("#"))
@@ -120,11 +128,11 @@ public class InterlanguageParser
                 if(!lastResource.equals(resource))
                 {
                     String id = LinkUtil.parseWord(idResource);
-                    Resource r = new Resource(lang, resource);
-                    Set<Resource> set = pairs.get(id);
-                    if(set == null)
+                    String wikiLink = links.get(resource);
+                    if(wikiLink != null)
                     {
-                        set = new TreeSet<>();
+                        Resource r = new Resource(lang, resource, wikiLink);
+                        Set<Resource> set = new TreeSet<>();
                         set.add(r);
                         pairs.put(id, set);
                     }
