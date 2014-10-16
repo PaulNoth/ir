@@ -1,1 +1,0 @@
-Q26,http://sk.dbpedia.org/resource/Severné_Írsko,Q29,http://sk.dbpedia.org/resource/Španielsko,Q17,http://sk.dbpedia.org/resource/Írsko,http://sk.dbpedia.org/resource/Japonsko
