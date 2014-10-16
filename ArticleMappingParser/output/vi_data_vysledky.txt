@@ -11,3 +11,8 @@ nemecka s 957322 anglickymi a 126887 sk
 566 640 kompletných preložených trojíc FR, DE, EN
 
 192479 párov sk Dbpedia a wikipedia
+
+interlanguage_links_fr.ttl 1767731
+interlanguage_links_de.ttl 1920199
+interlanguage_links_en.ttl 5882404
+interlanguage_links_sk.ttl 256396
