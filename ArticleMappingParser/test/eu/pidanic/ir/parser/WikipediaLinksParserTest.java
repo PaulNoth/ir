@@ -8,10 +8,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.pidanic.ir.parser.Parser;
-import eu.pidanic.ir.parser.WikipediaLinksParser;
 import eu.pidanic.ir.util.CsvReader;
 
+/**
+ * Class that tests {@link WikipediaLinksParser} against sample output.
+ * 
+ * @author Pidanic
+ * 
+ */
 public class WikipediaLinksParserTest
 {
     private static final File OUTPUT_EN = new File("data" + File.separator
