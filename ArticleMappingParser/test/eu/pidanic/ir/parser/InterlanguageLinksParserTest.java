@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.pidanic.ir.parser.InterlanguageLinksParser;
-import eu.pidanic.ir.parser.Parser;
 import eu.pidanic.ir.util.CsvReader;
 
 public class InterlanguageLinksParserTest
@@ -50,7 +48,7 @@ public class InterlanguageLinksParserTest
     }
 
     @Test
-    public void testEnInterlanguage() throws IOException
+    public void testParseInterlanguageLinksEn() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_EN);
         Map<String, String> actual = interlanguage.parse(INPUT_EN);
@@ -58,7 +56,7 @@ public class InterlanguageLinksParserTest
     }
 
     @Test
-    public void testDeInterlanguage() throws IOException
+    public void testParseInterlanguageLinksDe() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_DE);
         Map<String, String> actual = interlanguage.parse(INPUT_DE);
@@ -66,7 +64,7 @@ public class InterlanguageLinksParserTest
     }
 
     @Test
-    public void testFrInterlanguage() throws IOException
+    public void testParseInterlanguageLinksFr() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_FR);
         Map<String, String> actual = interlanguage.parse(INPUT_FR);
@@ -74,7 +72,7 @@ public class InterlanguageLinksParserTest
     }
 
     @Test
-    public void testSkInterlanguage() throws IOException
+    public void testParseInterlanguageLinksSk() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_SK);
         Map<String, String> actual = interlanguage.parse(INPUT_SK);
