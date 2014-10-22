@@ -56,9 +56,8 @@ public class Matcher
         String lang = dbPediaMappingPath.substring(
                 dbPediaMappingPath.lastIndexOf("_") + 1,
                 dbPediaMappingPath.indexOf("."));
-        File output = new File(
-                "C:\\Users\\Pavol\\Desktop\\Nový priečinok\\output_dbpedia_wikipedia_links_"
-                        + lang + ".csv");
+        File output = new File("temp\\output_dbpedia_wikipedia_links_" + lang
+                + ".csv");
         BufferedReader br = new BufferedReader(new FileReader(
                 wikipediaMappingPath));
         String line = null;
