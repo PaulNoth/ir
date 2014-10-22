@@ -10,6 +10,12 @@ import org.junit.Test;
 
 import eu.pidanic.ir.util.CsvReader;
 
+/**
+ * Class that tests {@link InterlanguageLinksParser} against sample output.
+ * 
+ * @author Pidanic
+ * 
+ */
 public class InterlanguageLinksParserTest
 {
     private static final File OUTPUT_EN = new File("data" + File.separator
