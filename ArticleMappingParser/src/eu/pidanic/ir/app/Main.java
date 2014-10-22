@@ -1,8 +1,6 @@
 package eu.pidanic.ir.app;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 
@@ -10,13 +8,6 @@ public class Main
 {
     public static void main(String[] args) throws IOException, ParseException
     {
-        // System.out.println(new WikilinksParser()
-        // .parseWikipediaLinks(Language.SK));
-        List<Set<Resource>> resources = new InterlanguageParser()
-                .getTranslatedPairs();
-        // System.out.println(resources);
-        new Dictionary().createDictionary(resources);
-
         // Search search = new Search();
         // System.out.println("Vitajte v aplikácii slovník");
         // System.out.println("Podporované jazyky SK, EN, DE, FR");
