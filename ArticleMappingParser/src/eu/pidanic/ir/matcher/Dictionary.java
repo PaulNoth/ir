@@ -47,10 +47,6 @@ public class Dictionary
         {
             String[] tokens = frLine.split(",");
             String key = tokens[0];
-            if(tokens.length < 3)
-            {
-                System.out.println();
-            }
             if(result.containsKey(key))
             {
                 result.get(key).put(tokens[1], tokens[2]);

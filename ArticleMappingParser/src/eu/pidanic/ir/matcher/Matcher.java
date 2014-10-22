@@ -16,21 +16,21 @@ public class Matcher
     public static void main(String[] args) throws IOException
     {
         Matcher match = new Matcher();
-        // match.createDbpediaWikipediaMapping(
-        // "data\\sample_output_interlanguage_links_fr.csv",
-        // "data\\sample_output_wikipedia_links_fr.csv");
-        // System.out.println("fr");
-        // match.createDbpediaWikipediaMapping(
-        // "temp\\output_interlanguage_links_fr.csv",
-        // "temp\\output_wikipedia_links_fr.csv");
-        // System.out.println("de");
-        // match.createDbpediaWikipediaMapping(
-        // "temp\\output_interlanguage_links_de.csv",
-        // "temp\\output_wikipedia_links_de.csv");
-        // System.out.println("sk");
-        // match.createDbpediaWikipediaMapping(
-        // "temp\\output_interlanguage_links_sk.csv",
-        // "temp\\output_wikipedia_links_sk.csv");
+        match.createDbpediaWikipediaMapping(
+                "data\\sample_output_interlanguage_links_fr.csv",
+                "data\\sample_output_wikipedia_links_fr.csv");
+        System.out.println("fr");
+        match.createDbpediaWikipediaMapping(
+                "temp\\output_interlanguage_links_fr.csv",
+                "temp\\output_wikipedia_links_fr.csv");
+        System.out.println("de");
+        match.createDbpediaWikipediaMapping(
+                "temp\\output_interlanguage_links_de.csv",
+                "temp\\output_wikipedia_links_de.csv");
+        System.out.println("sk");
+        match.createDbpediaWikipediaMapping(
+                "temp\\output_interlanguage_links_sk.csv",
+                "temp\\output_wikipedia_links_sk.csv");
         System.out.println("en");
         match.createDbpediaWikipediaMapping(
                 "temp\\output_interlanguage_links_en.csv",
