@@ -15,13 +15,13 @@ import eu.pidanic.ir.util.StringUtil;
 
 public class Dictionary
 {
-    private static final String SK_PATH = "temp\\sample_output_dbpedia_wikipedia_links_sk.csv";
+    private static final String SK_PATH = "temp\\output_dbpedia_wikipedia_links_sk.csv";
 
-    private static final String EN_PATH = "temp\\sample_output_dbpedia_wikipedia_links_en.csv";
+    private static final String EN_PATH = "temp\\output_dbpedia_wikipedia_links_en.csv";
 
-    private static final String DE_PATH = "temp\\sample_output_dbpedia_wikipedia_links_de.csv";
+    private static final String DE_PATH = "temp\\output_dbpedia_wikipedia_links_de.csv";
 
-    private static final String FR_PATH = "temp\\sample_output_dbpedia_wikipedia_links_fr.csv";
+    private static final String FR_PATH = "temp\\output_dbpedia_wikipedia_links_fr.csv";
 
     public static void main(String[] args) throws IOException
     {
@@ -47,6 +47,10 @@ public class Dictionary
         {
             String[] tokens = frLine.split(",");
             String key = tokens[0];
+            if(tokens.length < 3)
+            {
+                System.out.println();
+            }
             if(result.containsKey(key))
             {
                 result.get(key).put(tokens[1], tokens[2]);
