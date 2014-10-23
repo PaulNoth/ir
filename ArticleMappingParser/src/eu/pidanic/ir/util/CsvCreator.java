@@ -1,4 +1,4 @@
-package eu.pidanic.ir.dumper;
+package eu.pidanic.ir.util;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
