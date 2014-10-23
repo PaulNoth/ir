@@ -2,6 +2,7 @@ package eu.pidanic.ir.app;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,12 +30,15 @@ import eu.pidanic.ir.util.Language;
 
 public class Search
 {
+    private static final String WIKI = "Wiki";
+
     private static Analyzer analyzer;
 
     private static Directory directory;
 
     static
     {
+        BufferedReader br = null;
         try
         {
             analyzer = new StandardAnalyzer();
@@ -43,47 +47,73 @@ public class Search
                     analyzer);
             IndexWriter iwriter = new IndexWriter(directory, config);
 
-            File dictionary = new File("temp\\dictionary_full.txt");
-            BufferedReader br = new BufferedReader(new FileReader(dictionary));
+            File dictionary = new File("data" + File.separator
+                    + "dictionary.csv");
+            br = new BufferedReader(new FileReader(dictionary));
 
             String line = null;
             while ((line = br.readLine()) != null)
             {
                 Document doc = new Document();
-                String[] words = line.split("\\|");
+                String[] words = line.split(",");
                 doc.add(new Field(Language.SK.toString(), words[0],
                         TextField.TYPE_STORED));
-                doc.add(new Field(Language.EN.toString(), words[1],
+                doc.add(new Field(Language.SK.toString().toLowerCase() + WIKI,
+                        words[1], TextField.TYPE_STORED));
+
+                doc.add(new Field(Language.FR.toString(), words[2],
                         TextField.TYPE_STORED));
-                doc.add(new Field(Language.DE.toString(), words[2],
+                doc.add(new Field(Language.FR.toString().toLowerCase() + WIKI,
+                        words[3], TextField.TYPE_STORED));
+
+                doc.add(new Field(Language.EN.toString(), words[4],
                         TextField.TYPE_STORED));
-                doc.add(new Field(Language.FR.toString(), words[3],
-                        TextField.TYPE_STORED));
+                doc.add(new Field(Language.EN.toString().toLowerCase() + WIKI,
+                        words[5], TextField.TYPE_STORED));
+
+                doc.add(new Field(Language.DE.toString().toLowerCase(),
+                        words[6], TextField.TYPE_STORED));
+                doc.add(new Field(Language.DE.toString().toLowerCase() + WIKI,
+                        words[7], TextField.TYPE_STORED));
                 iwriter.addDocument(doc);
             }
-            br.close();
 
             iwriter.close();
         }
+        catch (FileNotFoundException fnf)
+        {
+            System.err.println("File not found " + fnf.getMessage());
+        }
         catch (IOException io)
         {
-            // TODO handle ex
+            System.err.println("IoException " + io.getMessage());
         }
         finally
         {
-            // TODO close stream
+            try
+            {
+                if(br != null)
+                {
+                    br.close();
+                }
+            }
+            catch (IOException e)
+            {
+                System.err.println("Problem while closing file "
+                        + e.getMessage());
+            }
         }
     }
 
     // TODO rethrow an log exception
-    public List<String> search(Language lang, String searchText)
+    public List<String> search(Language from, Language to, String searchText)
             throws IOException, ParseException
     {
         // search index
         DirectoryReader ireader = DirectoryReader.open(directory);
         IndexSearcher isearcher = new IndexSearcher(ireader);
         // parse simple query that searches for "text"
-        QueryParser qp = new QueryParser(lang.toString(), analyzer);
+        QueryParser qp = new QueryParser(from.toString(), analyzer);
         Query query = qp.parse(searchText);
         TopDocs topDocs = isearcher.search(query, 20);
         ScoreDoc[] hits = topDocs.scoreDocs;
@@ -94,24 +124,19 @@ public class Search
         for (int i = 0; i < hits.length; i++)
         {
             Document hitDoc = isearcher.doc(hits[i].doc);
-            // System.out.println(hitDoc);
-            // System.out.println(hits[i].score);
-            // assertEquals("This is the text to be indexed.",
-            // hitDoc.get("fieldname"));
             StringBuilder resultLine = new StringBuilder();
-            resultLine.append(hitDoc.get(Language.SK.toString()));
-            resultLine.append("|");
-            resultLine.append(hitDoc.get(Language.EN.toString()));
-            resultLine.append("|");
-            resultLine.append(hitDoc.get(Language.DE.toString()));
-            resultLine.append("|");
-            resultLine.append(hitDoc.get(Language.FR.toString()));
-            resultLine.append("|");
-            resultLine.append(hits[i].score);
+            resultLine.append(hitDoc.get(from.toString()));
+            resultLine.append(" -> ");
+            resultLine.append(hitDoc.get(to.toString()));
             result.add(resultLine.toString());
         }
         ireader.close();
-        directory.close();
+
         return result;
+    }
+
+    public void close() throws IOException
+    {
+        directory.close();
     }
 }
