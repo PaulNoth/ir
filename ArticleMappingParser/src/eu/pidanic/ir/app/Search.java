@@ -71,8 +71,8 @@ public class Search
                 doc.add(new Field(Language.EN.toString().toLowerCase() + WIKI,
                         words[5], TextField.TYPE_STORED));
 
-                doc.add(new Field(Language.DE.toString().toLowerCase(),
-                        words[6], TextField.TYPE_STORED));
+                doc.add(new Field(Language.DE.toString(), words[6],
+                        TextField.TYPE_STORED));
                 doc.add(new Field(Language.DE.toString().toLowerCase() + WIKI,
                         words[7], TextField.TYPE_STORED));
                 iwriter.addDocument(doc);
