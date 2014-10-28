@@ -9,7 +9,14 @@ import org.apache.lucene.queryparser.classic.ParseException;
 import eu.pidanic.ir.matcher.Dictionary;
 import eu.pidanic.ir.util.Language;
 
-public class Main
+/**
+ * 
+ * Main class.
+ * 
+ * @author Pidanic
+ *
+ */
+public class App
 {
     public static void main(String[] args) throws IOException, ParseException
     {

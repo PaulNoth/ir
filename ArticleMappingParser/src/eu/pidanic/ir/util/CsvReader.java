@@ -7,8 +7,24 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Simple reader for CSV files.
+ * 
+ * @author Pidanic
+ *
+ */
 public final class CsvReader
 {
+    /**
+     * Parses given csv file and return <code>Map</code> of result data. Parser
+     * expect lines with only 2 comma separated values.
+     * 
+     * @param file
+     *            File to parse.
+     * @return <code>Map</code> of parsed data.
+     * @throws IOException
+     *             if problem manipulating file.
+     */
     public Map<String, String> readCsv(File file) throws IOException
     {
         Map<String, String> result = new HashMap<>();

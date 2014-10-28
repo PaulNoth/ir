@@ -11,8 +11,26 @@ import java.util.Map;
 
 import eu.pidanic.ir.util.CsvReader;
 
+/**
+ * 
+ * Class for matching parsed data.
+ * 
+ * @author Pidanic
+ *
+ */
 final class Matcher
 {
+    /**
+     * Creates temporary mapping for given files.
+     * 
+     * @param dbPediaMappingPath
+     *            path for DBPedia mapping.
+     * @param wikipediaMappingPath
+     *            path for Wikipedialinks mapping.
+     * @throws IOException
+     *             if problem with manipulating files.
+     * 
+     */
     public void createDbpediaWikipediaMapping(String dbPediaMappingPath,
             String wikipediaMappingPath) throws IOException
     {

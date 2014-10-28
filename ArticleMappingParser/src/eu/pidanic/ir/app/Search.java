@@ -28,6 +28,13 @@ import org.apache.lucene.util.Version;
 
 import eu.pidanic.ir.util.Language;
 
+/**
+ * 
+ * Class that implements searching and indexing logic.
+ * 
+ * @author Pidanic
+ *
+ */
 public class Search
 {
     private static final String WIKI = "Wiki";
@@ -105,7 +112,6 @@ public class Search
         }
     }
 
-    // TODO rethrow an log exception
     public List<String> search(Language from, Language to, String searchText)
             throws IOException, ParseException
     {

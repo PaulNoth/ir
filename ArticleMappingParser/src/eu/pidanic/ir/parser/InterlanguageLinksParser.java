@@ -11,6 +11,12 @@ import java.util.Map;
 
 import eu.pidanic.ir.util.LinkUtil;
 
+/**
+ * Class for parsing <tt>interlanguage_links_*.ttl</tt> from DBpedia dump.
+ * 
+ * @author Pidanic
+ *
+ */
 final class InterlanguageLinksParser implements Parser
 {
 

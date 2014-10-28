@@ -15,6 +15,12 @@ import eu.pidanic.ir.parser.ParserFactory;
 import eu.pidanic.ir.util.LinkUtil;
 import eu.pidanic.ir.util.StringUtil;
 
+/**
+ * Class for creating input dictionary from all parsed files.
+ * 
+ * @author Pidanic
+ *
+ */
 public class Dictionary
 {
     private static final String SK_PATH = "temp" + File.separator

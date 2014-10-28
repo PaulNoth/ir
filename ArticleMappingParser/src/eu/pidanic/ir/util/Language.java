@@ -2,7 +2,7 @@ package eu.pidanic.ir.util;
 
 /**
  * 
- * Enumeration for Dbpedia Languages used in this program.
+ * Enumeration for Languages used in this program.
  * 
  * @author Pidanic
  *
