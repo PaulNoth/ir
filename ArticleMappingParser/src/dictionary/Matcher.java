@@ -1,4 +1,4 @@
-package eu.pidanic.ir.matcher;
+package dictionary;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,8 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import eu.pidanic.ir.util.CsvReader;
 
 /**
  * 
@@ -44,13 +42,11 @@ final class Matcher
         }
         slovakDbpedia = null;
 
-        // File skWiki = new File(wikipediaMappingPath);
-        // Map<String, String> skWikipedia = reader.readCsv(skWiki);
-
         String lang = dbPediaMappingPath.substring(
                 dbPediaMappingPath.lastIndexOf("_") + 1,
                 dbPediaMappingPath.indexOf("."));
-        File output = new File("temp\\sample_output_dbpedia_wikipedia_links_"
+        File output = new File("data" + File.separator + "temp"
+                + File.separator + "sample_output_dbpedia_wikipedia_links_"
                 + lang + ".csv");
         BufferedReader br = new BufferedReader(new FileReader(
                 wikipediaMappingPath));

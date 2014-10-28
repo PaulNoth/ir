@@ -1,4 +1,4 @@
-package eu.pidanic.ir.parser;
+package dictionary;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,8 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import eu.pidanic.ir.util.LinkUtil;
 
 /**
  * Class for parsing <tt>wikipedia_links_*.ttl</tt> from DBpedia dump.

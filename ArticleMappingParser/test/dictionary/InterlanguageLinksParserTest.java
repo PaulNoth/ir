@@ -1,4 +1,4 @@
-package eu.pidanic.ir.parser;
+package dictionary;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,80 +8,78 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.pidanic.ir.util.CsvReader;
-
 /**
- * Class that tests {@link WikipediaLinksParser} against sample output.
+ * Class that tests {@link InterlanguageLinksParser} against sample output.
  * 
  * @author Pidanic
  * 
  */
-public class WikipediaLinksParserTest
+public class InterlanguageLinksParserTest
 {
     private static final File OUTPUT_EN = new File("data" + File.separator
-            + "sample_output_wikipedia_links_en.csv");
+            + "sample_output_interlanguage_links_en.csv");
 
     private static final File INPUT_EN = new File("data" + File.separator
-            + "sample_wikipedia_links_en.ttl");
+            + "sample_interlanguage_links_en.ttl");
 
     private static final File OUTPUT_DE = new File("data" + File.separator
-            + "sample_output_wikipedia_links_de.csv");
+            + "sample_output_interlanguage_links_de.csv");
 
     private static final File INPUT_DE = new File("data" + File.separator
-            + "sample_wikipedia_links_de.ttl");
+            + "sample_interlanguage_links_de.ttl");
 
     private static final File OUTPUT_FR = new File("data" + File.separator
-            + "sample_output_wikipedia_links_fr.csv");
+            + "sample_output_interlanguage_links_fr.csv");
 
     private static final File INPUT_FR = new File("data" + File.separator
-            + "sample_wikipedia_links_fr.ttl");
+            + "sample_interlanguage_links_fr.ttl");
 
     private static final File OUTPUT_SK = new File("data" + File.separator
-            + "sample_output_wikipedia_links_sk.csv");
+            + "sample_output_interlanguage_links_sk.csv");
 
     private static final File INPUT_SK = new File("data" + File.separator
-            + "sample_wikipedia_links_sk.ttl");
+            + "sample_interlanguage_links_sk.ttl");
 
-    private Parser wikipediaLinks;
+    private Parser interlanguage;
 
     private CsvReader reader;
 
     @Before
     public void init()
     {
-        wikipediaLinks = new WikipediaLinksParser();
+        interlanguage = new InterlanguageLinksParser();
         reader = new CsvReader();
     }
 
     @Test
-    public void testParseWikipediaLinksEn() throws IOException
+    public void testParseInterlanguageLinksEn() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_EN);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_EN);
+        Map<String, String> actual = interlanguage.parse(INPUT_EN);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testParseWikipediaLinksDe() throws IOException
+    public void testParseInterlanguageLinksDe() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_DE);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_DE);
+        Map<String, String> actual = interlanguage.parse(INPUT_DE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testParseWikipediaLinksFr() throws IOException
+    public void testParseInterlanguageLinksFr() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_FR);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_FR);
+        Map<String, String> actual = interlanguage.parse(INPUT_FR);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testParseWikipediaLinksSk() throws IOException
+    public void testParseInterlanguageLinksSk() throws IOException
     {
         Map<String, String> expected = reader.readCsv(OUTPUT_SK);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_SK);
+        Map<String, String> actual = interlanguage.parse(INPUT_SK);
         Assert.assertEquals(expected, actual);
     }
 
@@ -89,7 +87,7 @@ public class WikipediaLinksParserTest
     public void testFileNotFound() throws IOException
     {
         Map<String, String> expected = reader.readCsv(new File("wrong_file"));
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_SK);
+        Map<String, String> actual = interlanguage.parse(INPUT_SK);
         Assert.assertEquals(expected, actual);
     }
 }

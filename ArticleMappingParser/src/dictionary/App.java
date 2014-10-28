@@ -1,13 +1,10 @@
-package eu.pidanic.ir.app;
+package dictionary;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 import org.apache.lucene.queryparser.classic.ParseException;
-
-import eu.pidanic.ir.matcher.Dictionary;
-import eu.pidanic.ir.util.Language;
 
 /**
  * 

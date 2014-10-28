@@ -1,4 +1,4 @@
-package eu.pidanic.ir.util;
+package dictionary;
 
 /**
  * Utility class for manipulating with dbpedia resource links.

@@ -1,4 +1,4 @@
-package eu.pidanic.ir.util;
+package dictionary;
 
 /**
  * Utility class for String operations.

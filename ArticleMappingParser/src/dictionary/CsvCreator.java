@@ -1,4 +1,4 @@
-package eu.pidanic.ir.util;
+package dictionary;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

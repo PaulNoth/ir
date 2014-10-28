@@ -1,4 +1,4 @@
-package eu.pidanic.ir.parser;
+package dictionary;
 
 import java.io.File;
 import java.io.IOException;

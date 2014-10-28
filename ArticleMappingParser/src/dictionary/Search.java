@@ -1,4 +1,4 @@
-package eu.pidanic.ir.app;
+package dictionary;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,8 +25,6 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
-
-import eu.pidanic.ir.util.Language;
 
 /**
  * 

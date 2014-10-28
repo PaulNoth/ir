@@ -1,4 +1,4 @@
-package eu.pidanic.ir.matcher;
+package dictionary;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,11 +10,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import eu.pidanic.ir.parser.Parser;
-import eu.pidanic.ir.parser.ParserFactory;
-import eu.pidanic.ir.util.LinkUtil;
-import eu.pidanic.ir.util.StringUtil;
-
 /**
  * Class for creating input dictionary from all parsed files.
  * 
@@ -23,17 +18,17 @@ import eu.pidanic.ir.util.StringUtil;
  */
 public class Dictionary
 {
-    private static final String SK_PATH = "temp" + File.separator
-            + "sample_output_dbpedia_wikipedia_links_sk.csv";
+    private static final String SK_PATH = "data" + File.separator + "temp"
+            + File.separator + "sample_output_dbpedia_wikipedia_links_sk.csv";
 
-    private static final String EN_PATH = "temp" + File.separator
-            + "sample_output_dbpedia_wikipedia_links_en.csv";
+    private static final String EN_PATH = "data" + File.separator + "temp"
+            + File.separator + "sample_output_dbpedia_wikipedia_links_en.csv";
 
-    private static final String DE_PATH = "temp" + File.separator
-            + "sample_output_dbpedia_wikipedia_links_de.csv";
+    private static final String DE_PATH = "data" + File.separator + "temp"
+            + File.separator + "sample_output_dbpedia_wikipedia_links_de.csv";
 
-    private static final String FR_PATH = "temp" + File.separator
-            + "sample_output_dbpedia_wikipedia_links_fr.csv";
+    private static final String FR_PATH = "data" + File.separator + "temp"
+            + File.separator + "sample_output_dbpedia_wikipedia_links_fr.csv";
 
     private static final File[] FILES_INTERLANGUAGE;
     // static
@@ -89,6 +84,9 @@ public class Dictionary
 
     public void createDictionary() throws IOException
     {
+        File tempDir = new File("data" + File.separator + "temp");
+        tempDir.mkdir();
+
         parseAll();
 
         matchAll();
@@ -151,7 +149,8 @@ public class Dictionary
         de.close();
 
         BufferedWriter dictionary = new BufferedWriter(new FileWriter(new File(
-                "temp" + File.separator + "sample_dictonary.csv")));
+                "data" + File.separator + "temp" + File.separator
+                        + "sample_dictonary.csv")));
         for (Map.Entry<String, Map<String, String>> map : result.entrySet())
         {
             if(map.getValue().size() == 4)
@@ -173,55 +172,70 @@ public class Dictionary
         }
         dictionary.flush();
         dictionary.close();
+
+        for (File temp : tempDir.listFiles())
+        {
+            temp.delete();
+        }
+        tempDir.delete();
     }
 
     private static void parseAll() throws IOException
     {
-        Parser parser = ParserFactory.createInterlanguageLinksParser();
-        parser.parseToFile(FILES_INTERLANGUAGE[0], new File("temp"
-                + File.separator + "sample_output_interlanguage_links_fr.csv"));
-        parser.parseToFile(FILES_INTERLANGUAGE[1], new File("temp"
-                + File.separator + "sample_output_interlanguage_links_de.csv"));
-        parser.parseToFile(FILES_INTERLANGUAGE[2], new File("temp"
-                + File.separator + "sample_output_interlanguage_links_en.csv"));
-        parser.parseToFile(FILES_INTERLANGUAGE[3], new File("temp"
-                + File.separator + "sample_output_interlanguage_links_sk.csv"));
+        Parser parser = new InterlanguageLinksParser();
+        parser.parseToFile(FILES_INTERLANGUAGE[0], new File("data"
+                + File.separator + "temp" + File.separator
+                + "sample_output_interlanguage_links_fr.csv"));
+        parser.parseToFile(FILES_INTERLANGUAGE[1], new File("data"
+                + File.separator + "temp" + File.separator
+                + "sample_output_interlanguage_links_de.csv"));
+        parser.parseToFile(FILES_INTERLANGUAGE[2], new File("data"
+                + File.separator + "temp" + File.separator
+                + "sample_output_interlanguage_links_en.csv"));
+        parser.parseToFile(FILES_INTERLANGUAGE[3], new File("data"
+                + File.separator + "temp" + File.separator
+                + "sample_output_interlanguage_links_sk.csv"));
 
-        parser = ParserFactory.createWikipediaLinksParser();
-        parser.parseToFile(FILES_WIKILINKS[0], new File("temp" + File.separator
+        parser = new WikipediaLinksParser();
+        parser.parseToFile(FILES_WIKILINKS[0], new File("data" + File.separator
+                + "temp" + File.separator
                 + "sample_output_wikipedia_links_fr.csv"));
 
-        parser.parseToFile(FILES_WIKILINKS[1], new File("temp" + File.separator
+        parser.parseToFile(FILES_WIKILINKS[1], new File("data" + File.separator
+                + "temp" + File.separator
                 + "sample_output_wikipedia_links_de.csv"));
 
-        parser.parseToFile(FILES_WIKILINKS[2], new File("temp" + File.separator
+        parser.parseToFile(FILES_WIKILINKS[2], new File("data" + File.separator
+                + "temp" + File.separator
                 + "sample_output_wikipedia_links_en.csv"));
 
-        parser.parseToFile(FILES_WIKILINKS[3], new File("temp" + File.separator
+        parser.parseToFile(FILES_WIKILINKS[3], new File("data" + File.separator
+                + "temp" + File.separator
                 + "sample_output_wikipedia_links_sk.csv"));
     }
 
     private static void matchAll() throws IOException
     {
         Matcher match = new Matcher();
-        match.createDbpediaWikipediaMapping("temp" + File.separator
-                + "sample_output_interlanguage_links_fr.csv", "temp"
-                + File.separator + "sample_output_wikipedia_links_fr.csv");
-        // System.out.println("fr");
-        match.createDbpediaWikipediaMapping("temp" + File.separator
-                + "sample_output_interlanguage_links_fr.csv", "temp"
-                + File.separator + "sample_output_wikipedia_links_fr.csv");
-        // System.out.println("de");
-        match.createDbpediaWikipediaMapping("temp" + File.separator
-                + "sample_output_interlanguage_links_de.csv", "temp"
-                + File.separator + "sample_output_wikipedia_links_de.csv");
-        // System.out.println("sk");
-        match.createDbpediaWikipediaMapping("temp" + File.separator
-                + "sample_output_interlanguage_links_sk.csv", "temp"
-                + File.separator + "sample_output_wikipedia_links_sk.csv");
-        // System.out.println("en");
-        match.createDbpediaWikipediaMapping("temp" + File.separator
-                + "sample_output_interlanguage_links_en.csv", "temp"
-                + File.separator + "sample_output_wikipedia_links_en.csv");
+        match.createDbpediaWikipediaMapping("data" + File.separator + "temp"
+                + File.separator + "sample_output_interlanguage_links_fr.csv",
+                "temp" + File.separator
+                        + "sample_output_wikipedia_links_fr.csv");
+        match.createDbpediaWikipediaMapping("data" + File.separator + "temp"
+                + File.separator + "sample_output_interlanguage_links_fr.csv",
+                "temp" + File.separator
+                        + "sample_output_wikipedia_links_fr.csv");
+        match.createDbpediaWikipediaMapping("data" + File.separator + "temp"
+                + File.separator + "sample_output_interlanguage_links_de.csv",
+                "temp" + File.separator
+                        + "sample_output_wikipedia_links_de.csv");
+        match.createDbpediaWikipediaMapping("data" + File.separator + "temp"
+                + File.separator + "sample_output_interlanguage_links_sk.csv",
+                "temp" + File.separator
+                        + "sample_output_wikipedia_links_sk.csv");
+        match.createDbpediaWikipediaMapping("data" + File.separator + "temp"
+                + File.separator + "sample_output_interlanguage_links_en.csv",
+                "temp" + File.separator
+                        + "sample_output_wikipedia_links_en.csv");
     }
 }
