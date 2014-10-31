@@ -13,11 +13,11 @@ import org.apache.lucene.queryparser.classic.ParseException;
  * @author Pidanic
  *
  */
-public class App
+public class DictionaryApplication
 {
     public static void main(String[] args) throws IOException, ParseException
     {
-        Dictionary dict = new Dictionary();
+        DictionaryMaker dict = new DictionaryMaker();
         dict.createDictionary();
 
         Search search = new Search();

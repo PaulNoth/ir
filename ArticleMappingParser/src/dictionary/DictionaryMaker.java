@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Pidanic
  *
  */
-public class Dictionary
+public class DictionaryMaker
 {
     private static final String SK_PATH = "data" + File.separator + "temp"
             + File.separator + "sample_output_dbpedia_wikipedia_links_sk.csv";
