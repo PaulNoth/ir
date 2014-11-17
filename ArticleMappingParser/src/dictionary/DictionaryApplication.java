@@ -26,32 +26,39 @@ public class DictionaryApplication
         Scanner scanner = new Scanner(System.in);
         while (true)
         {
-            System.out.println("-> pre koniec zadajte \"q\"");
-            System.out.println("-> pre hľadanie stlačte ľubovoľnú klávesu");
-            System.out.print(">");
-            String action = scanner.nextLine();
-            if("q".equalsIgnoreCase(action))
+            try
             {
-                break;
-            }
-            System.out.print("Zadajte preklad z (EN, SK, FR, DE): ");
-            String searchLang = scanner.nextLine().toUpperCase();
-            Language from = Language.valueOf(searchLang);
-            System.out.print("Zadajte preklad do (EN, SK, FR, DE): ");
-            String toString = scanner.nextLine().toUpperCase();
-            Language to = Language.valueOf(toString);
-            System.out.print("Zadajte hľadané slovo: ");
+                System.out.println("-> pre koniec zadajte \"q\"");
+                System.out.println("-> pre hľadanie stlačte ľubovoľnú klávesu");
+                System.out.print(">");
+                String action = scanner.nextLine();
+                if("q".equalsIgnoreCase(action))
+                {
+                    break;
+                }
+                System.out.print("Zadajte preklad z (EN, SK, FR, DE): ");
+                String searchLang = scanner.nextLine().toUpperCase();
+                Language from = Language.valueOf(searchLang);
+                System.out.print("Zadajte preklad do (EN, SK, FR, DE): ");
+                String toString = scanner.nextLine().toUpperCase();
+                Language to = Language.valueOf(toString);
+                System.out.print("Zadajte hľadané slovo: ");
 
-            String query = scanner.nextLine();
-            List<String> result = search.search(from, to, query);
-            System.out.println("\nZobrazujem " + result.size()
-                    + " výsledkov zoradených podľa najviac vyhovujúceho ");
-            for (String s : result)
-            {
-                System.out.println(s);
+                String query = scanner.nextLine();
+                List<String> result = search.search(from, to, query);
+                System.out.println("\nZobrazujem " + result.size()
+                        + " výsledkov zoradených podľa najviac vyhovujúceho ");
+                for (String s : result)
+                {
+                    System.out.println(s);
+                }
+                System.out.println();
+                System.out.println();
             }
-            System.out.println();
-            System.out.println();
+            catch (IllegalArgumentException e)
+            {
+                System.out.println("neznámy jazyk");
+            }
         }
         scanner.close();
 

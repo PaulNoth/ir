@@ -37,11 +37,11 @@ public class Search
 {
     private static final String WIKI = "Wiki";
 
-    private static Analyzer analyzer;
+    private Analyzer analyzer;
 
-    private static Directory directory;
+    private Directory directory;
 
-    static
+    // static
     {
         BufferedReader br = null;
         try
@@ -132,6 +132,13 @@ public class Search
             resultLine.append(hitDoc.get(from.toString()));
             resultLine.append(" -> ");
             resultLine.append(hitDoc.get(to.toString()));
+            String fromWiki = hitDoc.get(from.toString().toLowerCase() + WIKI);
+            String toWiki = hitDoc.get(to.toString().toLowerCase() + WIKI);
+            resultLine.append("\n");
+            resultLine.append(fromWiki);
+            resultLine.append(" -> ");
+            resultLine.append(toWiki);
+            resultLine.append("\n");
             result.add(resultLine.toString());
         }
         ireader.close();
