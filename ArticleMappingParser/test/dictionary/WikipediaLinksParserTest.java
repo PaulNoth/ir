@@ -16,31 +16,31 @@ import org.junit.Test;
  */
 public class WikipediaLinksParserTest
 {
-    private static final File OUTPUT_EN = new File("data" + File.separator
+    private static final File SAMPLE_OUTPUT_EN = new File("data" + File.separator
             + "sample_output_wikipedia_links_en.csv");
 
-    private static final File INPUT_EN = new File("data" + File.separator
+    private static final File SAMPLE_INPUT_EN = new File("data" + File.separator
             + "sample_wikipedia_links_en.ttl");
 
-    private static final File OUTPUT_DE = new File("data" + File.separator
+    private static final File SAMPLE_OUTPUT_DE = new File("data" + File.separator
             + "sample_output_wikipedia_links_de.csv");
 
-    private static final File INPUT_DE = new File("data" + File.separator
+    private static final File SAMPLE_INPUT_DE = new File("data" + File.separator
             + "sample_wikipedia_links_de.ttl");
 
-    private static final File OUTPUT_FR = new File("data" + File.separator
+    private static final File SAMPLE_OUTPUT_FR = new File("data" + File.separator
             + "sample_output_wikipedia_links_fr.csv");
 
-    private static final File INPUT_FR = new File("data" + File.separator
+    private static final File SAMPLE_INPUT_FR = new File("data" + File.separator
             + "sample_wikipedia_links_fr.ttl");
 
-    private static final File OUTPUT_SK = new File("data" + File.separator
+    private static final File SAMPLE_OUTPUT_SK = new File("data" + File.separator
             + "sample_output_wikipedia_links_sk.csv");
 
-    private static final File INPUT_SK = new File("data" + File.separator
+    private static final File SAMPLE_INPUT_SK = new File("data" + File.separator
             + "sample_wikipedia_links_sk.ttl");
 
-    private Parser wikipediaLinks;
+    private DbpediaParser wikipediaLinks;
 
     private CsvReader reader;
 
@@ -54,32 +54,32 @@ public class WikipediaLinksParserTest
     @Test
     public void testParseWikipediaLinksEn() throws IOException
     {
-        Map<String, String> expected = reader.readCsv(OUTPUT_EN);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_EN);
+        Map<String, String> expected = reader.readCsv(SAMPLE_OUTPUT_EN);
+        Map<String, String> actual = wikipediaLinks.parse(SAMPLE_INPUT_EN);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testParseWikipediaLinksDe() throws IOException
     {
-        Map<String, String> expected = reader.readCsv(OUTPUT_DE);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_DE);
+        Map<String, String> expected = reader.readCsv(SAMPLE_OUTPUT_DE);
+        Map<String, String> actual = wikipediaLinks.parse(SAMPLE_INPUT_DE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testParseWikipediaLinksFr() throws IOException
     {
-        Map<String, String> expected = reader.readCsv(OUTPUT_FR);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_FR);
+        Map<String, String> expected = reader.readCsv(SAMPLE_OUTPUT_FR);
+        Map<String, String> actual = wikipediaLinks.parse(SAMPLE_INPUT_FR);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testParseWikipediaLinksSk() throws IOException
     {
-        Map<String, String> expected = reader.readCsv(OUTPUT_SK);
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_SK);
+        Map<String, String> expected = reader.readCsv(SAMPLE_OUTPUT_SK);
+        Map<String, String> actual = wikipediaLinks.parse(SAMPLE_INPUT_SK);
         Assert.assertEquals(expected, actual);
     }
 
@@ -87,7 +87,7 @@ public class WikipediaLinksParserTest
     public void testFileNotFound() throws IOException
     {
         Map<String, String> expected = reader.readCsv(new File("wrong_file"));
-        Map<String, String> actual = wikipediaLinks.parse(INPUT_SK);
+        Map<String, String> actual = wikipediaLinks.parse(SAMPLE_INPUT_SK);
         Assert.assertEquals(expected, actual);
     }
 }

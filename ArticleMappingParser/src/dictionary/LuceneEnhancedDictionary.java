@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -22,7 +21,6 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 
@@ -33,15 +31,49 @@ import org.apache.lucene.util.Version;
  * @author Pidanic
  *
  */
-public class Search
+public class LuceneEnhancedDictionary extends LuceneDbpediaDictionary
 {
     private static final String WIKI = "Wiki";
 
-    private Analyzer analyzer;
+    @Override
+    public List<String> search(Language from, Language to, String searchText)
+            throws IOException, ParseException
+    {
+        // search index
+        DirectoryReader ireader = DirectoryReader.open(directory);
+        IndexSearcher isearcher = new IndexSearcher(ireader);
+        // parse simple query that searches for "text"
+        QueryParser qp = new QueryParser(from.toString(), analyzer);
+        Query query = qp.parse(searchText);
+        TopDocs topDocs = isearcher.search(query, 20);
+        ScoreDoc[] hits = topDocs.scoreDocs;
+        // ScoreDoc[] hits = isearcher.search(query, 1000).scoreDocs; // moze
+        // filtrovat,
+        // sortovat
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < hits.length; i++)
+        {
+            Document hitDoc = isearcher.doc(hits[i].doc);
+            StringBuilder resultLine = new StringBuilder();
+            resultLine.append(hitDoc.get(from.toString()));
+            resultLine.append(" -> ");
+            resultLine.append(hitDoc.get(to.toString()));
+            String fromWiki = hitDoc.get(from.toString().toLowerCase() + WIKI);
+            String toWiki = hitDoc.get(to.toString().toLowerCase() + WIKI);
+            resultLine.append("\n");
+            resultLine.append(fromWiki);
+            resultLine.append(" -> ");
+            resultLine.append(toWiki);
+            resultLine.append("\n");
+            result.add(resultLine.toString());
+        }
+        ireader.close();
 
-    private Directory directory;
+        return result;
+    }
 
-    // static
+    @Override
+    protected void initializeDictionaryData()
     {
         BufferedReader br = null;
         try
@@ -108,46 +140,5 @@ public class Search
                         + e.getMessage());
             }
         }
-    }
-
-    public List<String> search(Language from, Language to, String searchText)
-            throws IOException, ParseException
-    {
-        // search index
-        DirectoryReader ireader = DirectoryReader.open(directory);
-        IndexSearcher isearcher = new IndexSearcher(ireader);
-        // parse simple query that searches for "text"
-        QueryParser qp = new QueryParser(from.toString(), analyzer);
-        Query query = qp.parse(searchText);
-        TopDocs topDocs = isearcher.search(query, 20);
-        ScoreDoc[] hits = topDocs.scoreDocs;
-        // ScoreDoc[] hits = isearcher.search(query, 1000).scoreDocs; // moze
-        // filtrovat,
-        // sortovat
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < hits.length; i++)
-        {
-            Document hitDoc = isearcher.doc(hits[i].doc);
-            StringBuilder resultLine = new StringBuilder();
-            resultLine.append(hitDoc.get(from.toString()));
-            resultLine.append(" -> ");
-            resultLine.append(hitDoc.get(to.toString()));
-            String fromWiki = hitDoc.get(from.toString().toLowerCase() + WIKI);
-            String toWiki = hitDoc.get(to.toString().toLowerCase() + WIKI);
-            resultLine.append("\n");
-            resultLine.append(fromWiki);
-            resultLine.append(" -> ");
-            resultLine.append(toWiki);
-            resultLine.append("\n");
-            result.add(resultLine.toString());
-        }
-        ireader.close();
-
-        return result;
-    }
-
-    public void close() throws IOException
-    {
-        directory.close();
     }
 }

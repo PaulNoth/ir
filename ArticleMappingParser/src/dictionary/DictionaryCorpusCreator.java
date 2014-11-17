@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Pidanic
  *
  */
-public class DictionaryMaker
+public class DictionaryCorpusCreator
 {
     private static final String SK_PATH = "data" + File.separator + "temp"
             + File.separator + "sample_output_dbpedia_wikipedia_links_sk.csv";
@@ -82,7 +82,7 @@ public class DictionaryMaker
                 + "sample_wikipedia_links_sk.ttl");
     }
 
-    public void createDictionary() throws IOException
+    public void createEnhancedDictionary() throws IOException
     {
         File tempDir = new File("data" + File.separator + "temp");
         tempDir.mkdir();
@@ -159,7 +159,7 @@ public class DictionaryMaker
                 for (Map.Entry<String, String> entry : map.getValue()
                         .entrySet())
                 {
-                    dictLine.append(LinkUtil.parseWord(StringUtil
+                    dictLine.append(LinksUtil.parseWord(LinksUtil
                             .makeWords(entry.getKey())));
                     dictLine.append(",");
                     dictLine.append(entry.getValue());
@@ -182,7 +182,7 @@ public class DictionaryMaker
 
     private static void parseAll() throws IOException
     {
-        Parser parser = new InterlanguageLinksParser();
+        DbpediaParser parser = new InterlanguageLinksParser();
         parser.parseToFile(FILES_INTERLANGUAGE[0], new File("data"
                 + File.separator + "temp" + File.separator
                 + "sample_output_interlanguage_links_fr.csv"));
@@ -216,7 +216,7 @@ public class DictionaryMaker
 
     private static void matchAll() throws IOException
     {
-        Matcher match = new Matcher();
+        InterlanguageWikipediaLinksMatcher match = new InterlanguageWikipediaLinksMatcher();
         match.createDbpediaWikipediaMapping("data" + File.separator + "temp"
                 + File.separator + "sample_output_interlanguage_links_fr.csv",
                 "temp" + File.separator
@@ -237,5 +237,48 @@ public class DictionaryMaker
                 + File.separator + "sample_output_interlanguage_links_en.csv",
                 "temp" + File.separator
                         + "sample_output_wikipedia_links_en.csv");
+    }
+
+    public void createSimpleDictionary() throws IOException
+    {
+        // parseToFile(FILES_INTERLANGUAGE[0], new File("fr.csv"));
+        // parseToFile(FILES_INTERLANGUAGE[1], new File("de.csv"));
+        // parseToFile(FILES_INTERLANGUAGE[2], new File("en.csv"));
+        // parseToFile(FILES_INTERLANGUAGE[3], new File("sk.csv"));
+        // TODO
+    }
+
+    private static void parseToFile(File from, File to) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new FileReader(from));
+        String line = null;
+        String lastResource = "";
+        BufferedWriter bw = new BufferedWriter(new FileWriter(to));
+        while ((line = br.readLine()) != null)
+        {
+            if(!line.startsWith("#"))
+            {
+                String[] resources = line.split("\\s+");
+                String resource = LinksUtil.removeBracket(resources[0]);
+                String idResource = LinksUtil.removeBracket(resources[2]);
+                if(!lastResource.equals(resource))
+                {
+                    String id = LinksUtil.parseWord(idResource);
+                    // result.put(id, resource);
+                    resource = resource.replaceAll(",", "_");
+                    String outline = id
+                            + ","
+                            + LinksUtil
+                                    .makeWords(LinksUtil.parseWord(resource))
+                            + "\n";
+                    // System.out.println(outline);
+                    bw.write(outline);
+                    lastResource = resource;
+                }
+            }
+        }
+        bw.flush();
+        bw.close();
+        br.close();
     }
 }

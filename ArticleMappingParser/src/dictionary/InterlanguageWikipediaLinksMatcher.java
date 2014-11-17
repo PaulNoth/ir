@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Pidanic
  *
  */
-final class Matcher
+final class InterlanguageWikipediaLinksMatcher
 {
     /**
      * Creates temporary mapping for given files.

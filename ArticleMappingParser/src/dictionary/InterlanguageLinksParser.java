@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Pidanic
  *
  */
-final class InterlanguageLinksParser implements Parser
+final class InterlanguageLinksParser implements DbpediaParser
 {
 
     @Override
@@ -31,11 +31,11 @@ final class InterlanguageLinksParser implements Parser
             if(!line.startsWith("#"))
             {
                 String[] resources = line.split("\\s+");
-                String resource = LinkUtil.removeBracket(resources[0]);
-                String idResource = LinkUtil.removeBracket(resources[2]);
+                String resource = LinksUtil.removeBracket(resources[0]);
+                String idResource = LinksUtil.removeBracket(resources[2]);
                 if(!lastResource.equals(resource))
                 {
-                    String id = LinkUtil.parseWord(idResource);
+                    String id = LinksUtil.parseWord(idResource);
                     result.put(id, resource);
                     lastResource = resource;
                 }
@@ -57,11 +57,11 @@ final class InterlanguageLinksParser implements Parser
             if(!line.startsWith("#"))
             {
                 String[] resources = line.split("\\s+");
-                String resource = LinkUtil.removeBracket(resources[0]);
-                String idResource = LinkUtil.removeBracket(resources[2]);
+                String resource = LinksUtil.removeBracket(resources[0]);
+                String idResource = LinksUtil.removeBracket(resources[2]);
                 if(!lastResource.equals(resource))
                 {
-                    String id = LinkUtil.parseWord(idResource);
+                    String id = LinksUtil.parseWord(idResource);
                     // result.put(id, resource);
                     resource = resource.replaceAll(",", "_");
                     String outline = id + "," + resource + "\n";

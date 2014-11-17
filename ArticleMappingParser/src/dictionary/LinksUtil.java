@@ -1,16 +1,16 @@
 package dictionary;
 
 /**
- * Utility class for manipulating with dbpedia resource links.
+ * Utility class for manipulating with dbpedia resource urls.
  * 
  * @author Pidanic
  *
  */
-public final class LinkUtil
+public final class LinksUtil
 {
-    private LinkUtil()
+    private LinksUtil()
     {
-        throw new AssertionError(LinkUtil.class.getName()
+        throw new AssertionError(LinksUtil.class.getName()
                 + " cannot be instatiated");
     }
 
@@ -36,5 +36,16 @@ public final class LinkUtil
         int lastSlash = link.lastIndexOf("/");
         String word = link.substring(lastSlash + 1, link.length());
         return word;
+    }
+
+    /**
+     * Creates string with words separated with spaces that contains '_'.
+     * 
+     * @param dbWord
+     * @return word
+     */
+    public static String makeWords(String dbWord)
+    {
+        return dbWord.replaceAll("_", " ");
     }
 }

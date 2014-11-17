@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Specifies basic parsing operations for DBPedia.
+ * Specifies basic parsing operations for DBPedia dumps.
  * 
  * @author Pidanic
  *
  */
-public interface Parser
+public interface DbpediaParser
 {
     /**
      * Parses given file and returns pairs of parsed data.
