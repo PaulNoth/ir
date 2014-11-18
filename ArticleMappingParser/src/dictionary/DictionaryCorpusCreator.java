@@ -11,7 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Class for creating corpus of dictionary from all parsed data.
+ * Class for creating corpus of different types of dictionaries from all parsed
+ * data.
  * 
  * @author Pidanic
  *
@@ -31,18 +32,6 @@ public class DictionaryCorpusCreator
             + File.separator + "sample_output_dbpedia_wikipedia_links_fr.csv";
 
     private static final File[] FILES_INTERLANGUAGE;
-    // static
-    // {
-    // FILES_INTERLANGUAGE = new File[4];
-    // FILES_INTERLANGUAGE[0] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\interlanguage_links_fr.ttl");
-    // FILES_INTERLANGUAGE[1] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\interlanguage_links_de.ttl");
-    // FILES_INTERLANGUAGE[2] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\interlanguage_links_en.ttl");
-    // FILES_INTERLANGUAGE[3] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\interlanguage_links_sk.ttl");
-    // }
     static
     {
         FILES_INTERLANGUAGE = new File[4];
@@ -57,18 +46,6 @@ public class DictionaryCorpusCreator
     }
 
     private static final File[] FILES_WIKILINKS;
-    // static
-    // {
-    // FILES_WIKILINKS = new File[4];
-    // FILES_WIKILINKS[0] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\wikipedia_links_fr.ttl");
-    // FILES_WIKILINKS[1] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\wikipedia_links_de.ttl");
-    // FILES_WIKILINKS[2] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\wikipedia_links_en.ttl");
-    // FILES_WIKILINKS[3] = new File(
-    // "C:\\Users\\Paul P\\Desktop\\New Folder\\wikipedia_links_sk.ttl");
-    // }
     static
     {
         FILES_WIKILINKS = new File[4];
@@ -82,6 +59,21 @@ public class DictionaryCorpusCreator
                 + "sample_wikipedia_links_sk.ttl");
     }
 
+    /**
+     * <p>
+     * Creates corpus of enhanced dictionary.
+     * </p>
+     * <p>
+     * Parses all interlanguage_link and wikipedia_links input files, and
+     * matches parsed word through temporary files until required corpus file is
+     * created.
+     * </p>
+     * <p>
+     * Because of memory requirements this was done with temporary files.
+     * </p>
+     * 
+     * @throws IOException
+     */
     public void createEnhancedDictionary() throws IOException
     {
         File tempDir = new File("data" + File.separator + "temp");
@@ -239,49 +231,47 @@ public class DictionaryCorpusCreator
                         + "sample_output_wikipedia_links_en.csv");
     }
 
-    public void createSimpleDictionary() throws IOException
-    {
-        parseToFile(FILES_INTERLANGUAGE[0], new File("data" + File.separator
-                + "fr.csv"));
-        parseToFile(FILES_INTERLANGUAGE[1], new File("data" + File.separator
-                + "de.csv"));
-        parseToFile(FILES_INTERLANGUAGE[2], new File("data" + File.separator
-                + "en.csv"));
-        parseToFile(FILES_INTERLANGUAGE[3], new File("data" + File.separator
-                + "sk.csv"));
-    }
-
-    private static void parseToFile(File from, File to) throws IOException
-    {
-        BufferedReader br = new BufferedReader(new FileReader(from));
-        String line = null;
-        String lastResource = "";
-        BufferedWriter bw = new BufferedWriter(new FileWriter(to));
-        while ((line = br.readLine()) != null)
-        {
-            if(!line.startsWith("#"))
-            {
-                String[] resources = line.split("\\s+");
-                String resource = LinksUtil.removeBrackets(resources[0]);
-                String idResource = LinksUtil.removeBrackets(resources[2]);
-                if(!lastResource.equals(resource))
-                {
-                    String id = LinksUtil.parseWord(idResource);
-                    // result.put(id, resource);
-                    resource = resource.replaceAll(",", "_");
-                    String outline = id
-                            + ","
-                            + LinksUtil
-                                    .makeWords(LinksUtil.parseWord(resource))
-                            + "\n";
-                    // System.out.println(outline);
-                    bw.write(outline);
-                    lastResource = resource;
-                }
-            }
-        }
-        bw.flush();
-        bw.close();
-        br.close();
-    }
+    // public void createSimpleDictionary() throws IOException
+    // {
+    // parseToFile(FILES_INTERLANGUAGE[0], new File("data" + File.separator
+    // + "fr.csv"));
+    // parseToFile(FILES_INTERLANGUAGE[1], new File("data" + File.separator
+    // + "de.csv"));
+    // parseToFile(FILES_INTERLANGUAGE[2], new File("data" + File.separator
+    // + "en.csv"));
+    // parseToFile(FILES_INTERLANGUAGE[3], new File("data" + File.separator
+    // + "sk.csv"));
+    // }
+    //
+    // private static void parseToFile(File from, File to) throws IOException
+    // {
+    // BufferedReader br = new BufferedReader(new FileReader(from));
+    // String line = null;
+    // String lastResource = "";
+    // BufferedWriter bw = new BufferedWriter(new FileWriter(to));
+    // while ((line = br.readLine()) != null)
+    // {
+    // if(!line.startsWith("#"))
+    // {
+    // String[] resources = line.split("\\s+");
+    // String resource = LinksUtil.removeBrackets(resources[0]);
+    // String idResource = LinksUtil.removeBrackets(resources[2]);
+    // if(!lastResource.equals(resource))
+    // {
+    // String id = LinksUtil.parseWord(idResource);
+    // resource = resource.replaceAll(",", "_");
+    // String outline = id
+    // + ","
+    // + LinksUtil
+    // .makeWords(LinksUtil.parseWord(resource))
+    // + "\n";
+    // bw.write(outline);
+    // lastResource = resource;
+    // }
+    // }
+    // }
+    // bw.flush();
+    // bw.close();
+    // br.close();
+    // }
 }

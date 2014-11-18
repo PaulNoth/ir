@@ -30,9 +30,10 @@ import org.apache.lucene.util.Version;
  * Class that implements searching and indexing logic for Simple dictionary.
  * </p>
  * <p>
- * Enhanced dictionary searches given input and returns translated result. If
- * translation of given input cannot be found, result contains information about
- * it.
+ * Simple dictionary searches given input and returns translated result. As an
+ * input can be used any of known dbpedia terms. It is not required that all
+ * word have to have corresponding match in another language. If translation of
+ * given input cannot be found, result contains information about it.
  * </p>
  * 
  * @author Pidanic
@@ -74,7 +75,6 @@ public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
             {
                 resultLine.append("Neexistuje preklad");
             }
-            // resultLine.append(hitDoc.get(to.toString()));
             result.add(resultLine.toString());
         }
         ireader.close();
@@ -98,10 +98,18 @@ public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
             IndexWriter iwriter = new IndexWriter(directory, config);
 
             // TODO
-            File en = new File("temp\\en.csv");
-            File de = new File("temp\\de.csv");
-            File sk = new File("temp\\sk.csv");
-            File fr = new File("temp\\fr.csv");
+            // File en = new File("temp\\en.csv");
+            // File de = new File("temp\\de.csv");
+            // File sk = new File("temp\\sk.csv");
+            // File fr = new File("temp\\fr.csv");
+            File en = new File("data" + File.separator
+                    + "sample_output_interlanguage_links_en.csv");
+            File de = new File("data" + File.separator
+                    + "sample_output_interlanguage_links_de.csv");
+            File sk = new File("data" + File.separator
+                    + "sample_output_interlanguage_links_sk.csv");
+            File fr = new File("data" + File.separator
+                    + "sample_output_interlanguage_links_fr.csv");
 
             brEn = new BufferedReader(new FileReader(en));
             String line = null;
@@ -113,7 +121,8 @@ public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
                 {
                     doc.add(new Field(Language.EN.toString() + "id", words[0],
                             TextField.TYPE_STORED));
-                    doc.add(new Field(Language.EN.toString(), words[1],
+                    doc.add(new Field(Language.EN.toString(), LinksUtil
+                            .makeWords(LinksUtil.parseWord(words[1])),
                             TextField.TYPE_STORED));
                     iwriter.addDocument(doc);
                 }
@@ -128,7 +137,8 @@ public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
                 {
                     doc.add(new Field(Language.FR.toString() + "id", words[0],
                             TextField.TYPE_STORED));
-                    doc.add(new Field(Language.FR.toString(), words[1],
+                    doc.add(new Field(Language.FR.toString(), LinksUtil
+                            .makeWords(LinksUtil.parseWord(words[1])),
                             TextField.TYPE_STORED));
                     iwriter.addDocument(doc);
                 }
@@ -143,7 +153,8 @@ public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
                 {
                     doc.add(new Field(Language.DE.toString() + "id", words[0],
                             TextField.TYPE_STORED));
-                    doc.add(new Field(Language.DE.toString(), words[1],
+                    doc.add(new Field(Language.DE.toString(), LinksUtil
+                            .makeWords(LinksUtil.parseWord(words[1])),
                             TextField.TYPE_STORED));
                     iwriter.addDocument(doc);
                 }
@@ -158,7 +169,8 @@ public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
                 {
                     doc.add(new Field(Language.SK.toString() + "id", words[0],
                             TextField.TYPE_STORED));
-                    doc.add(new Field(Language.SK.toString(), words[1],
+                    doc.add(new Field(Language.SK.toString(), LinksUtil
+                            .makeWords(LinksUtil.parseWord(words[1])),
                             TextField.TYPE_STORED));
                     iwriter.addDocument(doc);
                 }

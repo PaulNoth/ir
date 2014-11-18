@@ -87,9 +87,11 @@ public class DictionaryApplication
                 System.out.print(">");
 
                 String query = scanner.nextLine();
-                List<String> result = dictionarySearch.translate(from, to, query);
-                System.out.println("\nZobrazujem " + result.size()
-                        + " výsledkov zoradených podľa najviac vyhovujúceho ");
+                List<String> result = dictionarySearch.translate(from, to,
+                        query);
+                System.out.println("\nZobrazujem " + result.size() + " "
+                        + getSlovakResult(result.size())
+                        + " zoradených podľa najviac vyhovujúceho ");
                 for (String s : result)
                 {
                     System.out.println(s);
@@ -126,5 +128,20 @@ public class DictionaryApplication
         System.out
                 .println("\tAk pre dané slovo neexistuje preklad, je o tom zobrazená informácia.");
         System.out.println();
+    }
+
+    private static String getSlovakResult(int n)
+    {
+        switch (n)
+        {
+        case 1:
+            return "výsledok";
+        case 2:
+        case 3:
+        case 4:
+            return "výsledky";
+        default:
+            return "výsledkov";
+        }
     }
 }
