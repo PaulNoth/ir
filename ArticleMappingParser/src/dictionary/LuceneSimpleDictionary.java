@@ -24,10 +24,24 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 
+/**
+ * 
+ * <p>
+ * Class that implements searching and indexing logic for Simple dictionary.
+ * </p>
+ * <p>
+ * Enhanced dictionary searches given input and returns translated result. If
+ * translation of given input cannot be found, result contains information about
+ * it.
+ * </p>
+ * 
+ * @author Pidanic
+ *
+ */
 public class LuceneSimpleDictionary extends LuceneDbpediaDictionary
 {
     @Override
-    public List<String> search(Language from, Language to, String searchText)
+    public List<String> translate(Language from, Language to, String searchText)
             throws IOException, ParseException
     {
         DirectoryReader ireader = DirectoryReader.open(directory);

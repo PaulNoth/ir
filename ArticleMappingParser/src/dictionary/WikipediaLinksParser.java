@@ -31,10 +31,10 @@ final class WikipediaLinksParser implements DbpediaParser
                 String[] links = line.split("\\s+");
                 if(links[0].contains("dbpedia"))
                 {
-                    String dbpediaUrl = LinksUtil.removeBracket(links[0]);
+                    String dbpediaUrl = LinksUtil.removeBrackets(links[0]);
                     if(!lastResource.equals(dbpediaUrl))
                     {
-                        String wikiUrl = LinksUtil.removeBracket(links[2]);
+                        String wikiUrl = LinksUtil.removeBrackets(links[2]);
                         result.put(dbpediaUrl, wikiUrl);
                     }
                 }
@@ -58,10 +58,10 @@ final class WikipediaLinksParser implements DbpediaParser
                 String[] links = line.split("\\s+");
                 if(links[0].contains("dbpedia"))
                 {
-                    String dbpediaUrl = LinksUtil.removeBracket(links[0]);
+                    String dbpediaUrl = LinksUtil.removeBrackets(links[0]);
                     if(!lastResource.equals(dbpediaUrl))
                     {
-                        String wikiUrl = LinksUtil.removeBracket(links[2]);
+                        String wikiUrl = LinksUtil.removeBrackets(links[2]);
                         dbpediaUrl = dbpediaUrl.replaceAll(",", "_");
                         wikiUrl = wikiUrl.replaceAll(",", "_");
                         String outline = dbpediaUrl + "," + wikiUrl + "\n";

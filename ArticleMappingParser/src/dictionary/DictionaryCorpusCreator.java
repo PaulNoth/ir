@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Class for creating input dictionary from all parsed files.
+ * Class for creating corpus of dictionary from all parsed data.
  * 
  * @author Pidanic
  *
@@ -241,11 +241,14 @@ public class DictionaryCorpusCreator
 
     public void createSimpleDictionary() throws IOException
     {
-        // parseToFile(FILES_INTERLANGUAGE[0], new File("fr.csv"));
-        // parseToFile(FILES_INTERLANGUAGE[1], new File("de.csv"));
-        // parseToFile(FILES_INTERLANGUAGE[2], new File("en.csv"));
-        // parseToFile(FILES_INTERLANGUAGE[3], new File("sk.csv"));
-        // TODO
+        parseToFile(FILES_INTERLANGUAGE[0], new File("data" + File.separator
+                + "fr.csv"));
+        parseToFile(FILES_INTERLANGUAGE[1], new File("data" + File.separator
+                + "de.csv"));
+        parseToFile(FILES_INTERLANGUAGE[2], new File("data" + File.separator
+                + "en.csv"));
+        parseToFile(FILES_INTERLANGUAGE[3], new File("data" + File.separator
+                + "sk.csv"));
     }
 
     private static void parseToFile(File from, File to) throws IOException
@@ -259,8 +262,8 @@ public class DictionaryCorpusCreator
             if(!line.startsWith("#"))
             {
                 String[] resources = line.split("\\s+");
-                String resource = LinksUtil.removeBracket(resources[0]);
-                String idResource = LinksUtil.removeBracket(resources[2]);
+                String resource = LinksUtil.removeBrackets(resources[0]);
+                String idResource = LinksUtil.removeBrackets(resources[2]);
                 if(!lastResource.equals(resource))
                 {
                     String id = LinksUtil.parseWord(idResource);

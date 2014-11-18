@@ -26,7 +26,16 @@ import org.apache.lucene.util.Version;
 
 /**
  * 
- * Class that implements searching and indexing logic.
+ * <p>
+ * Class that implements searching and indexing logic for Enhanced dictionary.
+ * </p>
+ * <p>
+ * Enhanced dictionary searches given input and returns translated result. Only
+ * these translations are returned that have translations of all supported
+ * languages.<br>
+ * Translated result contains Wikipedia links to give more information about
+ * given input and translated output.
+ * </p>
  * 
  * @author Pidanic
  *
@@ -36,7 +45,7 @@ public class LuceneEnhancedDictionary extends LuceneDbpediaDictionary
     private static final String WIKI = "Wiki";
 
     @Override
-    public List<String> search(Language from, Language to, String searchText)
+    public List<String> translate(Language from, Language to, String searchText)
             throws IOException, ParseException
     {
         // search index

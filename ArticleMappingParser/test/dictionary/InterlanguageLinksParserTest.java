@@ -42,13 +42,13 @@ public class InterlanguageLinksParserTest
 
     private DbpediaParser interlanguage;
 
-    private CsvReader reader;
+    private DbpediaParsedDataCsvReader reader;
 
     @Before
     public void init()
     {
         interlanguage = new InterlanguageLinksParser();
-        reader = new CsvReader();
+        reader = new DbpediaParsedDataCsvReader();
     }
 
     @Test

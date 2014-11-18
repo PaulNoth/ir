@@ -26,7 +26,8 @@ public enum Language
      * Returns prefix used in dbpedia (<tt>http://[prefix]dbpedia.org/...</tt>).
      * </p>
      * <p>
-     * E.g. <tt>http://sk.dbpedia.org/resource/Blog</tt>
+     * E.g. <tt>http://sk.dbpedia.org/resource/Blog</tt> <br>
+     * <b>sk.</b> is a prefix.
      * <p>
      * 
      * @return prefix

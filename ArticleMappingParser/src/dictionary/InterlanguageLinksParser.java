@@ -31,8 +31,8 @@ final class InterlanguageLinksParser implements DbpediaParser
             if(!line.startsWith("#"))
             {
                 String[] resources = line.split("\\s+");
-                String resource = LinksUtil.removeBracket(resources[0]);
-                String idResource = LinksUtil.removeBracket(resources[2]);
+                String resource = LinksUtil.removeBrackets(resources[0]);
+                String idResource = LinksUtil.removeBrackets(resources[2]);
                 if(!lastResource.equals(resource))
                 {
                     String id = LinksUtil.parseWord(idResource);
@@ -57,8 +57,8 @@ final class InterlanguageLinksParser implements DbpediaParser
             if(!line.startsWith("#"))
             {
                 String[] resources = line.split("\\s+");
-                String resource = LinksUtil.removeBracket(resources[0]);
-                String idResource = LinksUtil.removeBracket(resources[2]);
+                String resource = LinksUtil.removeBrackets(resources[0]);
+                String idResource = LinksUtil.removeBrackets(resources[2]);
                 if(!lastResource.equals(resource))
                 {
                     String id = LinksUtil.parseWord(idResource);

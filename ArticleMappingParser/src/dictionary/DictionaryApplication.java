@@ -25,8 +25,8 @@ public class DictionaryApplication
         Scanner scanner = new Scanner(System.in);
         while (true)
         {
-            System.out.println("-> Pre obohatený slovník zadajte 1");
-            System.out.println("-> Pre jednoduchý slovník zadajte 2");
+            System.out.println("-> Pre Obohatený slovník zadajte 1");
+            System.out.println("-> Pre Jednoduchý slovník zadajte 2");
             System.out.println("-> Pre rozšírené informácie zadajte \"h\"");
             System.out
                     .println("-> Pre koniec zadajte \"q\" (funguje aj pri výbere jazyka)");
@@ -34,11 +34,15 @@ public class DictionaryApplication
             String option = scanner.nextLine();
             if("1".equals(option))
             {
+                System.out.println("Slovník sa inicializuje, prosím čakajte");
+                System.out.println();
                 dictionarySearch = new LuceneEnhancedDictionary();
                 break;
             }
             else if("2".equals(option))
             {
+                System.out.println("Slovník sa inicializuje, prosím čakajte");
+                System.out.println();
                 dictionarySearch = new LuceneSimpleDictionary();
                 break;
             }
@@ -56,32 +60,34 @@ public class DictionaryApplication
                 System.out.println("Neznáma voľba");
             }
         }
-        System.out.println("Slovník sa inicializuje, prosím čakajte");
-        System.out.println();
 
-        System.out.println("Podporované jazyky SK, EN, DE, FR");
+        System.out
+                .println("Podporované jazyky: Slovenčina (SK), Angličtina (EN), Nemčina (DE), Francúzština (FR)");
         while (true)
         {
             try
             {
-                System.out.print("Zadajte preklad z (EN, SK, FR, DE): ");
+                System.out.println("Zadajte preklad z (EN, SK, FR, DE): ");
+                System.out.print(">");
                 String searchLang = scanner.nextLine().toUpperCase();
                 if("q".equalsIgnoreCase(searchLang))
                 {
                     break;
                 }
                 Language from = Language.valueOf(searchLang);
-                System.out.print("Zadajte preklad do (EN, SK, FR, DE): ");
+                System.out.println("Zadajte preklad do (EN, SK, FR, DE): ");
+                System.out.print(">");
                 String toString = scanner.nextLine().toUpperCase();
                 if("q".equalsIgnoreCase(toString))
                 {
                     break;
                 }
                 Language to = Language.valueOf(toString);
-                System.out.print("Zadajte hľadané slovo: ");
+                System.out.println("Zadajte hľadané slovo: ");
+                System.out.print(">");
 
                 String query = scanner.nextLine();
-                List<String> result = dictionarySearch.search(from, to, query);
+                List<String> result = dictionarySearch.translate(from, to, query);
                 System.out.println("\nZobrazujem " + result.size()
                         + " výsledkov zoradených podľa najviac vyhovujúceho ");
                 for (String s : result)
@@ -93,7 +99,7 @@ public class DictionaryApplication
             }
             catch (IllegalArgumentException e)
             {
-                System.out.println("neznámy jazyk");
+                System.out.println("Neznámy jazyk");
             }
         }
         scanner.close();
@@ -103,6 +109,22 @@ public class DictionaryApplication
 
     private static void showHelp()
     {
-        // TODO Auto-generated method stub
+        System.out.println("Aplikácia slovník\n\t (c) Pavol Pidanič\n");
+        System.out
+                .println("Vznikla ako projekt na predmet Vyhľadávanie informácií.\n");
+        System.out.println("Aplikácia obsahuje 2 typy prekladových slovníkov:");
+        System.out.println("1.) Obohatený slovník");
+        System.out
+                .println("\tObsahuje preklady pojmov zo 4 jazykov, ale len takých, pre ktoré existuje preklad vo všetkých súčasne.");
+        System.out
+                .println("\tJe teda možné, že niektoré vyhľadávané slová nebudú preložené, kvôli neexistujúcej väzbe pojmu medzi jazykmi.");
+        System.out
+                .println("\tNavyše ku každému prekladu aplikácia zobrazí linku na Wikipédiu, ktorá obsahuje ďalšie informácie k danému pojmu.");
+        System.out.println("2.) Jednoduchý slovník");
+        System.out
+                .println("\tPo zadaní ľubovoľného pojmu vo zvolenom jazyku, preloží do druhého jazyka.");
+        System.out
+                .println("\tAk pre dané slovo neexistuje preklad, je o tom zobrazená informácia.");
+        System.out.println();
     }
 }

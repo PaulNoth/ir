@@ -20,7 +20,7 @@ public final class LinksUtil
      * @param link
      * @return
      */
-    public static String removeBracket(String link)
+    public static String removeBrackets(String link)
     {
         return link.substring(1, link.length() - 1);
     }
@@ -39,7 +39,7 @@ public final class LinksUtil
     }
 
     /**
-     * Creates string with words separated with spaces that contains '_'.
+     * Creates string with words separated with space instead '_'.
      * 
      * @param dbWord
      * @return word

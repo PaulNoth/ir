@@ -8,16 +8,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Simple reader for CSV files.
+ * <p>
+ * Simple reader for CSV files of parsed data.
+ * </p>
+ * <p>
+ * Expected files are outputs from basic parsing operations from implementations
+ * of {@link DbpediaParser}s.
+ * </p>
  * 
  * @author Pidanic
  *
  */
-public final class CsvReader
+public final class DbpediaParsedDataCsvReader
 {
     /**
      * Parses given csv file and return <code>Map</code> of result data. Parser
-     * expect lines with only 2 comma separated values.
+     * expects lines with only 2 values separated with comma. Values at 3rd,...,
+     * nth positions are ignored.
      * 
      * @param file
      *            File to parse.

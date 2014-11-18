@@ -42,13 +42,13 @@ public class WikipediaLinksParserTest
 
     private DbpediaParser wikipediaLinks;
 
-    private CsvReader reader;
+    private DbpediaParsedDataCsvReader reader;
 
     @Before
     public void init()
     {
         wikipediaLinks = new WikipediaLinksParser();
-        reader = new CsvReader();
+        reader = new DbpediaParsedDataCsvReader();
     }
 
     @Test

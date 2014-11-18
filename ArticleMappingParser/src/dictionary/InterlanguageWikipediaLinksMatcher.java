@@ -10,8 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
+ * <p>
  * Class for matching parsed data.
+ * </p>
+ * <p>
+ * The purpose is to find a match between data from parsed files
+ * <tt>interlanguage_links_*</tt> and <tt>wikipedia_links_*</tt> and creates
+ * output with corresponding matches.
+ * </p>
  * 
  * @author Pidanic
  *
@@ -19,7 +25,14 @@ import java.util.Map;
 final class InterlanguageWikipediaLinksMatcher
 {
     /**
-     * Creates temporary mapping for given files.
+     * <p>
+     * Creates temporary mapping between parsed <tt>interlanguage_links</tt> and
+     * <tt>wikipedia_links</tt>
+     * </p>
+     * <p>
+     * Output is <tt>csv</tt> file that contains idenficator in
+     * <tt>interlanguage_links</tt>, Dbpedia URL and match on Wikipedia URL.
+     * </p>
      * 
      * @param dbPediaMappingPath
      *            path for DBPedia mapping.
@@ -33,7 +46,7 @@ final class InterlanguageWikipediaLinksMatcher
             String wikipediaMappingPath) throws IOException
     {
         File slovak = new File(dbPediaMappingPath);
-        CsvReader reader = new CsvReader();
+        DbpediaParsedDataCsvReader reader = new DbpediaParsedDataCsvReader();
         Map<String, String> slovakDbpedia = reader.readCsv(slovak);
         Map<String, String> slovakDbpediaReverse = new HashMap<>();
         for (Map.Entry<String, String> entry : slovakDbpedia.entrySet())

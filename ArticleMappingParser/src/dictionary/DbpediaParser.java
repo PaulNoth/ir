@@ -13,7 +13,13 @@ import java.util.Map;
 public interface DbpediaParser
 {
     /**
+     * <p>
      * Parses given file and returns pairs of parsed data.
+     * </p>
+     * <p>
+     * Pairs mostly consist of some identificator as key and dbpedia url as
+     * value.
+     * </p>
      * 
      * @param file
      *            File to parse.
@@ -24,7 +30,14 @@ public interface DbpediaParser
     Map<String, String> parse(File file) throws IOException;
 
     /**
+     * <p>
      * Parses given file and writes to given file.
+     * </p>
+     * <p>
+     * Parser output is represented as would be returned from
+     * {@link #parse(File)}.
+     * 
+     * </p>
      * 
      * @param from
      *            File to parse.
