@@ -277,7 +277,7 @@ public class DictionaryCorpusCreator
                 String value = entry.getValue();
                 if(result.containsKey(key))
                 {
-                    result.get(key).set(0, value);
+                    result.get(key).set(i, value);
                 }
                 else
                 {
