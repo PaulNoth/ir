@@ -16,3 +16,10 @@ interlanguage_links_fr.ttl 1767731
 interlanguage_links_de.ttl 1920199
 interlanguage_links_en.ttl 5882404
 interlanguage_links_sk.ttl 256396
+
+wikipedia_links_de 2874709
+wikipedia_links_fr 2828753
+wikipedia_links_en 10948086
+wikipedia_links_sk 249686
+
+simple dictionary 7512942
